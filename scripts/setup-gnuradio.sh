@@ -42,6 +42,9 @@ sudo cp pybombs/src/hackrf/host/libhackrf/53-hackrf.rules /etc/udev/rules.d/
 pybombs -v install bladeRF
 sed 's/@BLADERF_GROUP@/plugdev/g' pybombs/src/bladeRF/host/misc/udev/88-nuand.rules.in > pybombs/src/bladeRF/host/misc/udev/88-nuand.rules
 sudo cp pybombs/src/bladeRF/host/misc/udev/88-nuand.rules /etc/udev/rules.d/
+sudo add-apt-repository -y ppa:bladerf/bladerf-snapshots
+sudo apt-get update
+sudo apt-get install -y --no-install-recommends bladerf-firmware-fx3 bladerf-fpga-hostedx40 bladerf-fpga-hostedx115 bladerf-fpga-hostedxa4 bladerf-fpga-hostedxa9
 
 ### UHD
 pybombs -v install uhd
