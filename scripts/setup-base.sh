@@ -28,6 +28,7 @@ sudo apt-get -y install exfat-utils exfat-fuse
 echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
 sudo apt-get -y install wireshark
 sudo usermod -aG wireshark gnuradio
+sudo usermod -aG plugdev gnuradio
 
 ### ZSH
 sudo apt-get -y install zsh
@@ -37,22 +38,6 @@ sudo chsh -s /bin/zsh gnuradio
 
 ### FONTS
 fc-cache -fr
-
-### SPACEMACS
-sudo apt-get -y install emacs25
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-cd .emacs.d
-git checkout master
-git reset --hard $(git describe --tags $(git rev-list --tags --max-count=1))
-cd ~
-emacs --batch \
-    --eval "(setq gc-cons-threshold 100000000)" \
-    --eval "(defconst spacemacs-version \"0.200.13\" \"Spacemacs version.\")" \
-    --eval "(defconst spacemacs-emacs-min-version   \"24.4\" \"Minimal version of Emacs.\")" \
-    --eval "(load-file \"/home/gnuradio/.emacs.d/core/core-load-paths.el\")" \
-    --eval "(require 'core-spacemacs)" \
-    --eval "(spacemacs/init)" \
-    --eval "(configuration-layer/sync)"
 
 ### VIM
 sudo apt-get -y install vim vim-gnome
@@ -89,6 +74,9 @@ sudo apt-get -y install cpufrequtils
 sudo systemctl stop ondemand
 sudo systemctl disable ondemand
 echo "GOVERNOR=\"performance\"" | sudo tee -a /etc/default/cpufrequtils
+
+### Glances
+curl -L https://bit.ly/glances | /bin/bash
 
 ### Favorites
 xvfb-run -a dconf write /org/gnome/shell/favorite-apps "['terminator.desktop', 'firefox.desktop', 'org.gnome.Nautilus.desktop']"

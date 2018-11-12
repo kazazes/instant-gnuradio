@@ -22,6 +22,8 @@ pybombs -v recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.g
 mkdir -p /home/gnuradio/pybombs
 pybombs prefix init /home/gnuradio/pybombs -a master
 pybombs config default_prefix master
+pybombs config makewidth $(nproc)
+
 echo 'PATH="$HOME/.local/bin:${PATH}"' >> .zshrc
 echo 'PATH="$HOME/.local/bin:${PATH}"' >> .bashrc
 echo "source /home/gnuradio/pybombs/setup_env.sh" >> .zshrc
@@ -36,6 +38,14 @@ sudo apt-get -y install pkg-config libfftw3-dev
 pybombs -v install hackrf
 sudo cp pybombs/src/hackrf/host/libhackrf/53-hackrf.rules /etc/udev/rules.d/
 
+### BLADERF
+pybombs -v install bladeRF
+sed 's/@BLADERF_GROUP@/plugdev/g' pybombs/src/bladeRF/host/misc/udev/88-nuand.rules.in > pybombs/src/bladeRF/host/misc/udev/88-nuand.rules
+sudo cp pybombs/src/bladeRF/host/misc/udev/88-nuand.rules /etc/udev/rules.d/
+sudo add-apt-repository -y ppa:bladerf/bladerf-snapshots
+sudo apt-get update
+sudo apt-get install -y --no-install-recommends bladerf-firmware-fx3 bladerf-fpga-hostedx40 bladerf-fpga-hostedx115 bladerf-fpga-hostedxa4 bladerf-fpga-hostedxa9
+
 ### UHD
 pybombs -v install uhd
 sudo cp pybombs/src/uhd/host/utils/uhd-usrp.rules /etc/udev/rules.d/
@@ -48,6 +58,9 @@ pybombs -v install gnuradio
 rm -rf ~/.gnome/apps/gnuradio-grc.desktop
 rm -rf ~/.local/share/applications/gnuradio-grc.desktop
 mv gnuradio-grc.desktop .local/share/applications/gnuradio-grc.desktop
+
+### SoapySDR
+pybombs -v install soapysdr soapyremote soapybladerf
 
 ### GR OSMOSDR
 pybombs -v install gr-osmosdr
@@ -73,17 +86,13 @@ make
 make install
 cd
 
-pybombs -v install gr-foo
-pybombs -v install gr-ieee-80211
-pybombs -v install gr-ieee-802154
-pybombs -v install gr-rds
 pybombs -v install inspectrum
 xdg-icon-resource install --context apps --novendor --size 96 Pictures/inspectrum-icon.png
 
 ### CLEAN UP OUR STUFF
 rm -r Downloads/*
 
-### FAVORIT APPLICATIONS
+### FAVORITE APPLICATIONS
 xvfb-run dconf write /org/gnome/shell/favorite-apps "['gnuradio-grc.desktop', 'gqrx.desktop', 'fosphor.desktop', 'inspectrum.desktop', 'terminator.desktop', 'gnuradio-web.desktop', 'firefox.desktop', 'org.gnome.Nautilus.desktop']"
 
 ### The German Code

@@ -6,7 +6,8 @@
       "source_path": "vms/base/instant-gnuradio-base.ova",
       "ssh_username": "gnuradio",
       "ssh_password": "gnuradio",
-      "shutdown_command": "sudo systemctl poweroff",
+      "shutdown_command": "sudo shutdown -h now",
+      "shutdown_timeout": "30s",
       "guest_additions_mode": "disable",
       "vm_name": "instant-gnuradio",
       "export_opts": [
