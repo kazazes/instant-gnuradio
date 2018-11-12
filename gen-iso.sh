@@ -10,10 +10,8 @@ export FS_DIR=casper
 sudo rm -rf ${WORK} ${CD}
 sudo mkdir -p ${CD}/{${FS_DIR},boot/grub} ${WORK}/rootfs
 
-
 sudo apt-get update
 sudo apt-get -y install grub2 xorriso squashfs-tools
-
 
 sudo rsync -av --one-file-system --exclude=/proc/* --exclude=/dev/* \
 	--exclude=/sys/* --exclude=/tmp/* --exclude=/lost+found \
@@ -54,12 +52,10 @@ sudo chroot ${WORK}/rootfs /bin/bash /chroot-iso.sh
 
 ########### LEAVE CHROOT ###############
 
-
 export kversion=`cd ${WORK}/rootfs/boot && ls -1 vmlinuz-* | tail -1 | sed 's@vmlinuz-@@'`
 sudo cp -vp ${WORK}/rootfs/boot/vmlinuz-${kversion} ${CD}/${FS_DIR}/vmlinuz
 sudo cp -vp ${WORK}/rootfs/boot/initrd.img-${kversion} ${CD}/${FS_DIR}/initrd.img
 sudo cp -vp ${WORK}/rootfs/boot/memtest86+.bin ${CD}/boot
-
 
 sudo umount ${WORK}/rootfs/proc
 sudo umount ${WORK}/rootfs/sys
