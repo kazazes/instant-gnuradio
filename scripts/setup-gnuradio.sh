@@ -54,6 +54,9 @@ rm -rf ~/.gnome/apps/gnuradio-grc.desktop
 rm -rf ~/.local/share/applications/gnuradio-grc.desktop
 mv gnuradio-grc.desktop .local/share/applications/gnuradio-grc.desktop
 
+### SoapySDR
+pybombs -v install soapysdr soapyremote soapybladerf
+
 ### GR OSMOSDR
 pybombs -v install gr-osmosdr
 
