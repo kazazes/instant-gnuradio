@@ -75,5 +75,8 @@ sudo systemctl stop ondemand
 sudo systemctl disable ondemand
 echo "GOVERNOR=\"performance\"" | sudo tee -a /etc/default/cpufrequtils
 
+### Glances
+curl -L https://bit.ly/glances | /bin/bash
+
 ### Favorites
 xvfb-run -a dconf write /org/gnome/shell/favorite-apps "['terminator.desktop', 'firefox.desktop', 'org.gnome.Nautilus.desktop']"
