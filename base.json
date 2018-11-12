@@ -100,11 +100,6 @@
         },
         {
             "type": "file",
-            "source": "assets/spacemacs",
-            "destination": ".spacemacs"
-        },
-        {
-            "type": "file",
             "source": "assets/gitconfig",
             "destination": ".gitconfig"
         },
