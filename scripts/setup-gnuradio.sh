@@ -22,6 +22,8 @@ pybombs -v recipes add gr-etcetera git+https://github.com/gnuradio/gr-etcetera.g
 mkdir -p /home/gnuradio/pybombs
 pybombs prefix init /home/gnuradio/pybombs -a master
 pybombs config default_prefix master
+pybombs config makewidth $(nproc)
+
 echo 'PATH="$HOME/.local/bin:${PATH}"' >> .zshrc
 echo 'PATH="$HOME/.local/bin:${PATH}"' >> .bashrc
 echo "source /home/gnuradio/pybombs/setup_env.sh" >> .zshrc
