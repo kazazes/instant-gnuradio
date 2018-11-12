@@ -83,10 +83,6 @@ make
 make install
 cd
 
-pybombs -v install gr-foo
-pybombs -v install gr-ieee-80211
-pybombs -v install gr-ieee-802154
-pybombs -v install gr-rds
 pybombs -v install inspectrum
 xdg-icon-resource install --context apps --novendor --size 96 Pictures/inspectrum-icon.png
 
